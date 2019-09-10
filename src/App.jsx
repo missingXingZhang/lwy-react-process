@@ -8,6 +8,10 @@ import About from './components/about/About'
 import Home from './components/home/Home'
 //导入配置文件中定义的路由
 import routers from './config/routers'
+
+import Register from './components/HocTest/register'
+import Login from './components/HocTest/login'
+
 export default class App extends React.Component {
     constructor(props) {
         super(props)
@@ -21,7 +25,12 @@ export default class App extends React.Component {
                 {routers.map((route,index)=>{
                     return <Route {...route} key={index}/>
                 })}
+                <div>
+                    <Register/>
+                    <Login/>
+                </div>
             </Router>
+
         )
     }
 }

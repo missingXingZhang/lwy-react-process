@@ -3,7 +3,7 @@
  */
 //引入装饰器语法addDecoratorsLegacy和，简化路径的语法addWebpackAlias
 const {override, fixBabelImports, addLessLoader,addDecoratorsLegacy,addWebpackAlias} = require('customize-cra');
-
+const {resolve} = require("path")
 
 module.exports = override(
     fixBabelImports('import', {
@@ -21,6 +21,6 @@ module.exports = override(
     //简化路径
     addWebpackAlias({
         //配置路径别名
-        '@comps':resolved(__dirname,'./src/components')
+        '@comps':resolve(__dirname,'./src/components')
     })
 );
