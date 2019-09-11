@@ -23,6 +23,7 @@ module.exports = override(
     //简化路径
     addWebpackAlias({
         //配置路径别名
-        '@comps':resolve(__dirname,'./src/components')
+        '@comps':resolve(__dirname,'./src/components'),
+        '@redux':resolve(__dirname,'./src/redux')
     })
 );

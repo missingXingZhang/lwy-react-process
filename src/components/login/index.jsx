@@ -3,9 +3,9 @@ import {Form, Icon, Input, Button,message} from 'antd';
 import logo from './logo.png'
 import './login.less'
 import axios from 'axios'
-import {saveUser} from '../../redux/action-creator'
+import {saveUser} from '@redux/action-creator'
 import {connect} from 'react-redux'
-import store from  '../../redux/store'
+import store from  '@redux/store'
 @connect(
     null,
     {saveUser}
