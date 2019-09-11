@@ -8,4 +8,6 @@ import App from './App'
 import {Provider} from 'react-redux'
 //将store传入Provider中
 import store from './redux/store'
+
+import './assects/less/login.less'
 ReactDOM.render(<Provider store={store}><App/></Provider>,document.getElementById('root'))
