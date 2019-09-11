@@ -6,15 +6,17 @@ import {SAVE_USER} from './action-types'
 //如果有多个数据状态需要管理，需要引入此插件，
 //且外界要用的话需要结构赋值  {} = store.getState（）
 import {combineReducers} from 'redux'
-// import {getItem,setItem} from '../utils/storage'
+import {getItem,setItem} from '../utils/storage'
 
 const initUser = {
-    user: {},
-    token: ''
+    user: getItem('user') || {},
+    token: getItem('token') || ''
 }
 function user(prevState = initUser,action) {
     switch (action.type){
         case SAVE_USER:
+            setItem("user",action.data.user)
+            setItem("token",action.data.token)
             return  action.data
         default :
             return prevState
