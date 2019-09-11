@@ -6,6 +6,8 @@ import axios from 'axios'
 import {saveUser} from '@redux/action-creator'
 import {connect} from 'react-redux'
 import store from  '@redux/store'
+import instance from '../../api/request'
+
 @connect(
     null,
     {saveUser}
@@ -46,7 +48,8 @@ import store from  '@redux/store'
                 const {username,password} = value
                 // console.log(username,password);
                 // console.log(this.props);
-                axios.post('http://localhost:3000/api/login',{
+              //  未经过封装的ajax请求
+              /*  axios.post('http://localhost:3000/api/login',{
                     username,password
                 })
                     .then((response)=>{
@@ -58,7 +61,6 @@ import store from  '@redux/store'
                            this.props.saveUser(response.data.data)
                            console.log(this.props);
                            console.log(store.getState());
-
                            //跳转路由
                            this.props.history.replace("/")
 
@@ -72,6 +74,20 @@ import store from  '@redux/store'
                         message.error("网络连接不稳定，请稍后再试")
                         //清除密码框
                         resetFields("password")
+                    })*/
+              /*经过封装的ajax请求*/
+                instance.post('/login',{username, password})
+                    .then((result) => {
+                        // 登录成功
+                        message.success('登录成功~');
+                        // 保存用户数据  redux  localStorage / sessionStorage
+                        this.props.saveUser(result);
+                        // 跳转到 / 路由
+                        this.props.history.replace('/');
+                    })
+                    .catch(() => {
+                        // 清空密码
+                        this.props.form.resetFields('password');
                     })
             }
         })
