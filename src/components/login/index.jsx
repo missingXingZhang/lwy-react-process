@@ -1,21 +1,29 @@
 import React from 'react'
-import {Form, Icon, Input, Button, Checkbox} from 'antd';
+import {Form, Icon, Input, Button,message} from 'antd';
 import logo from './logo.png'
 import './login.less'
+import axios from 'axios'
+import {saveUser} from '../../redux/action-creator'
+import {connect} from 'react-redux'
 
+@connect(
+    null,
+    {saveUser}
+)
 @Form.create()
  class Login extends React.Component {
     constructor(props) {
         super(props)
     }
+    /*做表单校验！*/
     validator = (rule, value, callback)=>{
         console.log(rule,value);
         const field = rule.field === "password"?"密码":"用户名"
         if(!value){
             return callback(`请输入${field}`)
         }
-        if(value.length < 6){
-            return callback(`${field}长度必须大于6`)
+        if(value.length < 3){
+            return callback(`${field}长度必须大于3`)
         }
         if(value.length >13){
             return callback(`${field}长度必须小于13`)
@@ -26,6 +34,47 @@ import './login.less'
             return callback(`${field}不能为特殊字符`)
         }
         callback()
+    }
+    /*点击button按钮表单提交*/
+    handleSubmit =(e)=>{
+        e.preventDefault()
+        const {validateFields,resetFields} = this.props.form
+        console.log(this.props);
+        // console.log(validateFields);
+        validateFields((error,value)=>{
+            if(!error){
+                const {username,password} = value
+                // console.log(username,password);
+                // console.log(this.props);
+                axios.post('http://localhost:3000/api/login',{
+                    username,password
+                })
+                    .then((response)=>{
+                       console.log(response);
+                       if(response.data.status === 0){
+                           message.success("登录成功")
+                            //在跳转路由前保存数据(token,及用户信息)
+                           //1.用redux管理存储用户数据
+                           this.props.saveUser(response.data.data)
+                           console.log(this.state);
+                           
+                           //跳转路由
+                           this.props.history.replace("/")
+
+                       }else{
+                           message.error(response.data.msg)
+                           //清除密码框
+                           resetFields("password")
+                       }
+                    })
+                    .catch((error)=>{
+                        message.error("网络连接不稳定，请稍后再试")
+                        //清除密码框
+                        resetFields("password")
+                    })
+            }
+        })
+
     }
     render() {
         const { getFieldDecorator } = this.props.form;

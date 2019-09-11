@@ -20,13 +20,16 @@ export default class App extends React.Component {
     render() {
         return (
             <Router>
-               {/* <Route path="/about"  component={About}/>
-                <Route path="/" exact component={Home}/>*/}
-                {/*循环遍历生成路由，路由中的属性通过解包，key的话为index，因为路由的话，不太可能增删改*/}
-                {/*{routers.map((route,index)=>{
-                    return <Route {...route} key={index}/>
-                })}*/}
-                <Route path="/" component={Login}/>
+                <Switch>
+                    <Route path="/about"  component={About}/>
+                    <Route path="/" exact component={Home}/>
+                    {/*循环遍历生成路由，路由中的属性通过解包，key的话为index，因为路由的话，不太可能增删改*/}
+                    {routers.map((route,index)=>{
+                        return <Route {...route} key={index}/>
+                    })}
+                    <Route path="/login" component={Login}/>
+                </Switch>
+
             </Router>
         )
     }
