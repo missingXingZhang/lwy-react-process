@@ -29,7 +29,6 @@ export default class App extends React.Component {
                     })}
                     <Route path="/login" component={Login}/>
                 </Switch>
-
             </Router>
         )
     }

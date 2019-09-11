@@ -7,8 +7,8 @@ export function getItem(key) {
     return JSON.parse(result)
 }
 export function setItem(key,value) {
-    window.localStorage.setItem(key,JSON.stringify(value))
+     window.localStorage.setItem(key,JSON.stringify(value))
 }
 export function removeItem(key,value) {
-    window.localStorage.removeItem(key)
+     window.localStorage.removeItem(key)
 }

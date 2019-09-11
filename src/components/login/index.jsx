@@ -5,7 +5,7 @@ import './login.less'
 import axios from 'axios'
 import {saveUser} from '../../redux/action-creator'
 import {connect} from 'react-redux'
-
+import store from  '../../redux/store'
 @connect(
     null,
     {saveUser}
@@ -56,8 +56,9 @@ import {connect} from 'react-redux'
                             //在跳转路由前保存数据(token,及用户信息)
                            //1.用redux管理存储用户数据
                            this.props.saveUser(response.data.data)
-                           console.log(this.state);
-                           
+                           console.log(this.props);
+                           console.log(store.getState());
+
                            //跳转路由
                            this.props.history.replace("/")
 
@@ -74,7 +75,6 @@ import {connect} from 'react-redux'
                     })
             }
         })
-
     }
     render() {
         const { getFieldDecorator } = this.props.form;
