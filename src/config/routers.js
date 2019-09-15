@@ -1,12 +1,12 @@
 /**
  * Created by 627230087@qq.com on 2019/9/9.
  */
-import Home from '../components/home/Home'
+import BaseLayout from '../components/baselayout'
 import About from '../components/about/About'
 const  routers = [
     {
         path:'/',
-        component:Home,
+        component:BaseLayout,
         exact:true
     },
     {

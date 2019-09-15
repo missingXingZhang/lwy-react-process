@@ -24,6 +24,7 @@ module.exports = override(
     addWebpackAlias({
         //配置路径别名
         '@comps':resolve(__dirname,'./src/components'),
-        '@redux':resolve(__dirname,'./src/redux')
+        '@redux':resolve(__dirname,'./src/redux'),
+        '@cont':resolve(__dirname,'./src/containers')
     })
 );

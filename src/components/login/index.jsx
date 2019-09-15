@@ -1,13 +1,15 @@
 import React from 'react'
 import {Form, Icon, Input, Button,message} from 'antd';
-import logo from './logo.png'
+import logo from '../../assects/images/logo.png'
 import './login.less'
 import axios from 'axios'
 import {saveUser} from '@redux/action-creator'
 import {connect} from 'react-redux'
 import store from  '@redux/store'
 import instance from '../../api/request'
+import withCheckLogin from '@cont/with-check-login'
 
+@withCheckLogin
 @connect(
     null,
     {saveUser}
@@ -79,7 +81,7 @@ import instance from '../../api/request'
                 instance.post('/login',{username, password})
                     .then((result) => {
                         // 登录成功
-                        message.success('登录成功~');
+                        message.success(`${username}，欢迎您进入React后台管理系统`);
                         // 保存用户数据  redux  localStorage / sessionStorage
                         this.props.saveUser(result);
                         // 跳转到 / 路由
@@ -110,6 +112,7 @@ import instance from '../../api/request'
                                     validator:this.validator
                                 }]
                             })(
+
                                 <Input
                                     prefix={<Icon type="user" style={{color: 'rgba(0,0,0,.25)'}}/>}
                                     placeholder="请输入用户名"
